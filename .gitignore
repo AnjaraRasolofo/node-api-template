@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Runtime
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Env files (IMPORTANT)
+.env
+.env.*
+!.env.example
+
+# Build
+dist/
+build/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Prisma
+prisma/migrations/
+# (optionnel : si tu veux versionner les migrations, enlève cette ligne)
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+
+# Coverage (tests)
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Optional npm cache
+.npm
+
+# Optional eslint cache
+.eslintcache
+/src/generated/prisma
+
+/src/generated/prisma

@@ -1,7 +1,7 @@
-import { registerUser, loginUser } from "../services/auth.service.js";
-import { generateToken } from "../utils/generateToken.js";
+const { registerUser, loginUser } = require("../services/auth.service");
+const { generateToken } = require("../utils/generateToken");
 
-export const register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const user = await registerUser(req.body.email, req.body.password);
     res.json(user);
@@ -10,7 +10,7 @@ export const register = async (req, res) => {
   }
 };
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const user = await loginUser(req.body.email, req.body.password);
     const token = generateToken(user);
@@ -19,4 +19,9 @@ export const login = async (req, res) => {
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
+};
+
+module.exports = {
+  register,
+  login
 };

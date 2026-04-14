@@ -1,16 +1,22 @@
-import bcrypt from "bcrypt";
-import prisma from "../config/db.js";
+const bcrypt = require("bcrypt");
+const { AppDataSource } = require("../data-source");
 
-export const registerUser = async (email, password) => {
-  const hashed = await bcrypt.hash(password, 10);
+const userRepo = AppDataSource.getRepository("User");
 
-  return prisma.user.create({
-    data: { email, password: hashed }
+const registerUser = async (email, password) => {
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await userRepo.save({
+    email,
+    password: hashedPassword
   });
 };
 
-export const loginUser = async (email, password) => {
-  const user = await prisma.user.findUnique({ where: { email } });
+const loginUser = async (email, password) => {
+  
+  const user = await userRepo.findOneBy({
+    email: "test@mail.com"
+  });
 
   if (!user) throw new Error("User not found");
 
@@ -18,4 +24,9 @@ export const loginUser = async (email, password) => {
   if (!valid) throw new Error("Invalid password");
 
   return user;
+};
+
+module.exports = {
+  registerUser,
+  loginUser
 };
